@@ -61,7 +61,7 @@ a {
 }
 .author-window.disabled {
   position: absolute;
-  transform: scale(0.5) translate(-220vw, 0vh);
+  transform: scale(0.5) translate(-220vw, -70vh);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -379,7 +379,7 @@ a {
   }
 }
 .register-window.disabled {
-  transform: scale(0.3) translate(150vw, -90vh);
+  transform: scale(0.3) translate(150vw, -130vh);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;

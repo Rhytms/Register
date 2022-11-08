@@ -348,63 +348,26 @@ buttonToRegister.addEventListener('click', () => {
 	if (!authorWindow.classList.contains('disabled')) {
 		authorWindow.classList.add('disabled')
 		registerWindow.classList.remove('disabled')
+		email.classList.remove('_error')
+		passwordAuthor.classList.remove('_error')
+
 	} 
 })
 buttonToAuthor.addEventListener('click', () => {
 	if (!registerWindow.classList.contains('disabled')) {
 		registerWindow.classList.add('disabled')
 		authorWindow.classList.remove('disabled')
+		emailRegister.classList.remove('_error')
+		passwordRegister.classList.remove('_error')
+		loginUser.classList.remove('_error')
+		confirmPassword.classList.remove('_error')
+		firstName.classList.remove('_error')
+		secondName.classList.remove('_error')
+		phoneInput.classList.remove('_error')
+
+
 	} 
 })
-
-//--------------------------------
-
-// const randomItem = document.querySelectorAll('.object-paralax__item');
-// randomItem.forEach(item => {
-// 	const max = 100
-// 	item.style.left = `${(Math.random()*(max +1))}%`
-// 	item.style.top = `${(Math.random()*(max +1))}%`
-// 			})
-// 		const paralax = document.querySelector('.paralax')
-// 		window.onload = () => {
-// 	if (paralax) {
-	
-// 		const forItem = 50
-	
-// 		const speed = 0.05
-	
-// 		let positionX = 0, positionY = 0
-// 		let coordXprocent = 0, coordYprocent = 0
-	
-// 		function setMouseParalaxStyle() {
-// 			const distX = coordXprocent - positionX
-// 			const distY = coordYprocent - positionY
-	
-// 			positionX = positionX + (distX * speed)
-// 			positionY = positionY + (distY * speed)
-// 			randomItem.forEach(item => {
-// 			// const max = 100
-// 			// item.style.left = `${(Math.random()*(max +1))}%`
-// 			// item.style.top = `${(Math.random()*(max +1))}%`
-// 			item.style.cssText = `transform: translate(${positionX / forItem}%,${positionY / forItem}%)`
-// 			})
-// 			requestAnimationFrame(setMouseParalaxStyle)
-// 		}
-// 		setMouseParalaxStyle()
-// 		paralax.addEventListener('mousemove', (e) => {
-// 			const paralaxWidth = paralax.offsetWidth
-// 			const paralaxHeight = paralax.offsetHeight
-
-// 			const coordX = e.pageX - paralaxWidth / 2
-// 			const coordY = e.pageY - paralaxWidth / 2
-
-// 			coordXprocent = coordX / paralaxWidth * 100
-// 			coordYprocent = coordY / paralaxHeight * 100
-// 		})
-		
-// 	}
-// }
-
 
 
 //-----------------------

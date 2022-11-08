@@ -11,12 +11,10 @@
 }
 
 body, html {
-  position: relative;
   height: 100%;
   width: 100%;
   background-color: #20232A;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 li {
@@ -27,20 +25,35 @@ a {
   text-decoration: none;
 }
 
+._validate {
+  border: 1px solid green;
+}
+
+._error {
+  border: 1px solid red;
+}
+
 .wrapper {
+  height: 100%;
+  width: 100vw;
+  padding: 0 30px;
+}
+
+._container {
+  position: relative;
   width: 100%;
+  height: 100%;
   display: flex;
-  width: 100%;
 }
 
 .author-window {
-  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
+  position: absolute;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 0 auto;
   border-radius: 25px;
   background-color: #8b9696;
   text-align: center;
@@ -53,15 +66,9 @@ a {
   width: 100%;
   max-width: 600px;
 }
-.author-window.author {
-  top: 50%;
-  left: 50%;
-  overflow: hidden;
-  transform: translate(-50%, -50%);
-}
 .author-window.disabled {
-  position: absolute;
-  transform: scale(0.5) translate(-220vw, -70vh);
+  width: 50%;
+  transform: scale(0.5) translate(-190vw, -70vh);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -122,7 +129,6 @@ a {
 .author-window__title {
   font-size: 32px;
   font-weight: 400;
-  margin-right: 20px;
 }
 .author-window__header {
   display: flex;
@@ -138,40 +144,27 @@ a {
   }
 }
 .author-window__register {
-  border: 1px solid #20232A;
-  padding: 11px 22px;
+  position: relative;
+  padding: 11px 40px 11px 22px;
+  display: flex;
   cursor: pointer;
   transition: all 0.3s ease 0s;
+}
+.author-window__register svg {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease 0s;
+  width: 20px;
+  fill: #20232A;
 }
 .author-window__register:hover {
   background: #20232A;
   color: #fff;
 }
-.author-window__email.drible {
-  -webkit-animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-          animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-}
-@-webkit-keyframes trambling-animation {
-  0%, 20%, 100% {
-    transform: translateX(0px);
-  }
-  10%, 30% {
-    transform: translateX(-4px);
-  }
-  20%, 40% {
-    transform: translateX(4px);
-  }
-}
-@keyframes trambling-animation {
-  0%, 20%, 100% {
-    transform: translateX(0px);
-  }
-  10%, 30% {
-    transform: translateX(-4px);
-  }
-  20%, 40% {
-    transform: translateX(4px);
-  }
+.author-window__register:hover svg {
+  fill: #fff;
 }
 .author-window__email._validate {
   border: 1px solid green;
@@ -193,6 +186,17 @@ a {
 .author-window .window-password__block .window-password__block-item .window-password__eyes.drible > svg {
   -webkit-animation: 0.8s ease-in-out 0s normal none running trambling-animation;
           animation: 0.8s ease-in-out 0s normal none running trambling-animation;
+}
+@-webkit-keyframes trambling-animation {
+  0%, 20%, 100% {
+    transform: translateX(0px);
+  }
+  10%, 30% {
+    transform: translateX(-4px);
+  }
+  20%, 40% {
+    transform: translateX(4px);
+  }
 }
 @keyframes trambling-animation {
   0%, 20%, 100% {
@@ -235,21 +239,6 @@ a {
 }
 .author-window__password {
   position: relative;
-}
-.author-window__password.drible {
-  -webkit-animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-          animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-}
-@keyframes trambling-animation {
-  0%, 20%, 100% {
-    transform: translateX(0px);
-  }
-  10%, 30% {
-    transform: translateX(-4px);
-  }
-  20%, 40% {
-    transform: translateX(4px);
-  }
 }
 .author-window__password._validate {
   border: 1px solid green;
@@ -361,76 +350,57 @@ a {
   color: #fff;
 }
 
-.register-window._register {
-  height: inherit;
-  position: absolute;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-@media (max-height: 800px) {
-  .register-window._register {
-    left: 50%;
-    top: 0%;
-    transform: translate(-50%, 0%);
-  }
-}
 .register-window.disabled {
-  transform: scale(0.3) translate(150vw, -130vh);
+  width: 50%;
+  transform: scale(0.5) translate(90vw, -70vh);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 .register-window__header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 @media (max-width: 520px) {
   .register-window__header {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .register-window__header > :not(:last-child) {
-    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .register-window__header .register-window__register {
+    margin-left: 0;
   }
 }
 .register-window__title {
-  border: 1px solid #20232A;
-  padding: 11px 22px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
   font-size: 18px;
   font-weight: 500;
+  position: relative;
+  padding: 11px 22px 11px 40px;
+}
+.register-window__title svg {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease 0s;
+  width: 20px;
+  fill: #20232A;
 }
 .register-window__title:hover {
   background: #20232A;
   color: #fff;
 }
+.register-window__title:hover svg {
+  fill: #fff;
+}
 .register-window__register {
   font-size: 32px;
   font-weight: 400;
-  margin-left: 20px;
-}
-.register-window__login._error {
-  border: 1px solid red;
-}
-.register-window__email.drible {
-  -webkit-animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-          animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-}
-@keyframes trambling-animation {
-  0%, 20%, 100% {
-    transform: translateX(0px);
-  }
-  10%, 30% {
-    transform: translateX(-4px);
-  }
-  20%, 40% {
-    transform: translateX(4px);
-  }
 }
 .register-window__email._validate {
   border: 1px solid green;
@@ -441,55 +411,10 @@ a {
 .register-window__password {
   position: relative;
 }
-.register-window__password.drible {
-  -webkit-animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-          animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-}
-@keyframes trambling-animation {
-  0%, 20%, 100% {
-    transform: translateX(0px);
-  }
-  10%, 30% {
-    transform: translateX(-4px);
-  }
-  20%, 40% {
-    transform: translateX(4px);
-  }
-}
 .register-window__password._validate {
   border: 1px solid green;
 }
 .register-window__password._error {
-  border: 1px solid red;
-}
-.register-window .register-window__password.confirm.drible {
-  -webkit-animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-          animation: 0.8s ease-in-out 0s normal none running trambling-animation;
-}
-@keyframes trambling-animation {
-  0%, 20%, 100% {
-    transform: translateX(0px);
-  }
-  10%, 30% {
-    transform: translateX(-4px);
-  }
-  20%, 40% {
-    transform: translateX(4px);
-  }
-}
-.register-window .register-window__password.confirm._validate {
-  border: 1px solid green;
-}
-.register-window .register-window__password.confirm._error {
-  border: 1px solid red;
-}
-.register-window__name {
-  text-transform: capitalize;
-}
-.register-window__name._error {
-  border: 1px solid red;
-}
-.register-window__phone._error {
   border: 1px solid red;
 }
 
@@ -531,16 +456,59 @@ a {
   }
 }
 
-.first._error {
-  border: 1px solid red;
+.password-block__agreement {
+  display: flex;
+  align-items: center;
+}
+.password-block__agreement._error {
+  border: none;
+}
+.password-block__agreement._validate {
+  border: none;
+}
+.password-block__agreement a {
+  color: #fff;
+}
+@media (max-width: 520px) {
+  .password-block__agreement {
+    flex-direction: column-reverse;
+  }
+  .password-block__agreement > :not(:last-child) {
+    margin-top: 10px;
+  }
+  .password-block__agreement .remember__text {
+    font-size: 18px;
+    margin-left: 0;
+  }
 }
 
-.second._error {
-  border: 1px solid red;
+.agreement__check {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease 0s;
+  background-color: #20232A;
+  width: 25px;
+  height: 25px;
 }
-
-.remember-item__check._yes {
+.agreement__check svg {
+  transition: all 0.3s ease 0s;
+  position: absolute;
   left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 15px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.agreement__check._agreed {
+  border-radius: 50%;
+}
+.agreement__check._agreed svg {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  fill: #fff;
 }
 
 .paralax {
@@ -548,7 +516,8 @@ a {
   max-width: 100vw;
   height: 100vh;
   position: absolute;
-  background-image: url(../img/star1.svg);
+  background-image: url(../img/parallax.png);
   background-position: 50%;
   background-repeat: no-repeat;
+  background-size: 80%;
 }/*# sourceMappingURL=style.css.map */

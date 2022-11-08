@@ -1,7 +1,6 @@
 'use strict'
 
 const radioButton = document.querySelector('.remember-item__check')
-const radioButtonRegister = document.querySelector('.check-register')
 function radioYes(check) {
 	if (!check.classList.contains('_yes')) {
 		check.classList.add('_yes')
@@ -19,13 +18,8 @@ function rememberPassword(object) {
 		radioYes(radioButton)
 	})
 }
-function rememberPasswordRegister(object) {
-	object.addEventListener('click', () => {
-		radioYes(radioButtonRegister)
-	})
-}
+
 rememberPassword(radioButtonBlock)
-rememberPasswordRegister(radioButtonBlockRegister)
 
 
 //------------------- email
@@ -57,6 +51,17 @@ function updateInputRegister() {
 }
 email.addEventListener('input', updateInput);
 emailRegister.addEventListener('input', updateInputRegister);
+
+
+function validateForm(item)
+{
+var x=item.value;
+if (x==null || x==""){
+  item.classList.add('_error')
+  return false;
+	}
+
+}
 
 //------------------------ password
 const passwordAuthor = document.querySelector('.author-window__password');
@@ -122,27 +127,20 @@ function validateRegister(item) {
 function validateAuthor(item) {
 	item.onkeyup = function () {
 		
-	let invalidSymbol = /[\s\/\.\,\'\\\"\`\(\)\-\=\+\_\?\[\]\{\}\<\>\!\@\#\$\%\^\&\*]/
-		if(item.value.match(invalidSymbol)) {
-			item.classList.remove('_validate')
-			item.classList.add('_error')
-		} else {
-			item.classList.remove('_error')
-			item.classList.add('_validate')
-
-		}
 		if(item.value.length >= 6) {
 			item.classList.remove('_error')
 			item.classList.add('_validate')
-		}
-		else if (item.value.length <= 0) {
-			item.classList.add('_error')
-			
 		}
 		else {
 			item.classList.remove('_validate')
 			item.classList.add('_error')
 		}
+		let invalidSymbol = /[\s\/\.\,\'\\\"\`\(\)\-\=\+\_\?\[\]\{\}\<\>\!\@\#\$\%\^\&\*]/
+		if(item.value.match(invalidSymbol)) {
+			item.classList.remove('_validate')
+			item.classList.add('_error')
+		}
+
 		
 	}	
 }
@@ -177,6 +175,7 @@ function dribleEyesRegister(eye) {
 	eye.addEventListener('click', (e) => {
 	changeEye(eye)
 	ShowPassword(passwordRegister)
+	ShowPassword(confirmPassword)
 })
 }
 dribleEyes(passwordEye)
@@ -227,26 +226,27 @@ function SubmitAuthorButton(btn) {
 }
 function SubmitRegisterButton(btn) {
 	btn.addEventListener('click', () => {
-
-		validateForm(loginUser)
+		
 		validateForm(passwordRegister)
 		validateForm(emailRegister)
 		validateForm(confirmPassword)
-		validateForm(firstName)
-		validateForm(secondName)
-		validateForm(phoneInput)
+		validateForm(agreedBlock)
 		
 		drible(passwordRegister)
-		drible(loginUser)
 		drible(emailRegister)
 		drible(confirmPassword)
-		drible(firstName)
-		drible(secondName)
-		drible(phoneInput)
+
 		if (passwordRegister.classList.contains('_error')) {
 			blockEyesRegister.classList.add('drible')
 		}
-
+		if (!agreedCheck.classList.contains('_agreed')) {
+			drible(agreedBlock)
+			agreedCheck.classList.add('_error')
+			agreedBlock.classList.add('_error')
+		} else {
+			agreedBlock.classList.remove('_error')
+			agreedCheck.classList.remove('_error')
+		}
 		
 
 	})
@@ -271,72 +271,6 @@ function checkConfirmPassword(item) {
 	}
 }
 checkConfirmPassword()
-//-------------------------- names
-const firstName = document.querySelector('.register-window__name.first')
-const secondName = document.querySelector('.register-window__name.second')
-
-
-function CheckNames(item) {
-	item.onkeyup = function () {
-		
-	let invalidSymbol = /[\d\s\/\.\,\'\\\"\`\(\)\-\=\+\_\[\]\{\}\?\<\>\!\~\@\#\$\%\^\&\*]/
-		if(item.value.match(invalidSymbol)) {
-			item.classList.add('_error')
-		} else {
-			item.classList.remove('_error')
-		}
-		if (item.value.length <= 2) {
-			item.classList.add('_error')
-			
-		}
-	
-	}	
-	
-}
-CheckNames(firstName)
-CheckNames(secondName)
-//------------------------------ login
-const loginUser = document.querySelector('.register-window__login')
-function checkLogin(item) {
-	let invalidSymbol = /[\s\/\.\,\'\\\"\`\(\)\=\+\_\[\]\{\}\?\<\>\!\~\@\#\$\%\^\&\*]/
-		if(item.value.match(invalidSymbol)) {
-			item.classList.add('_error')
-		} else {
-			item.classList.remove('_error')
-	}
-	if (item.value.length <= 2) {
-			item.classList.add('_error')
-		
-	}
-}
-loginUser.addEventListener('keyup', () => {
-	checkLogin(loginUser)
-})
-
-function validateForm(item)
-{
-var x=item.value;
-if (x==null || x==""){
-  item.classList.add('_error')
-  return false;
-	}
-
-}
-//---------------------- phone
-const phoneInput = document.querySelector('.register-window__phone')
-function checkPhoneNumber(item) {
-	const numb = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
-	return numb.test(item)
-}
-function validationForm() {
-	phoneInput.value
-	if (!checkPhoneNumber(phoneInput)) {
-		phoneInput.classList.remove('_error')
-	} else {
-		phoneInput.classList.add('_error')
-	}
-}
-phoneInput.addEventListener('keyup', validationForm())
 //------------------------------ transform
 const buttonToRegister = document.querySelector('.author-window__register')
 const buttonToAuthor = document.querySelector('.register-window__title')
@@ -345,12 +279,12 @@ const authorWindow = document.querySelector('.author-window')
 const registerWindow = document.querySelector('.register-window')
 
 buttonToRegister.addEventListener('click', () => {
+	// document.body.style.padding = '0 15px'
 	if (!authorWindow.classList.contains('disabled')) {
 		authorWindow.classList.add('disabled')
 		registerWindow.classList.remove('disabled')
 		email.classList.remove('_error')
 		passwordAuthor.classList.remove('_error')
-
 	} 
 })
 buttonToAuthor.addEventListener('click', () => {
@@ -359,36 +293,49 @@ buttonToAuthor.addEventListener('click', () => {
 		authorWindow.classList.remove('disabled')
 		emailRegister.classList.remove('_error')
 		passwordRegister.classList.remove('_error')
-		loginUser.classList.remove('_error')
 		confirmPassword.classList.remove('_error')
-		firstName.classList.remove('_error')
-		secondName.classList.remove('_error')
-		phoneInput.classList.remove('_error')
+
 
 
 	} 
 })
+//----------------------------- agreed
+const agreedBlock = document.querySelector('.password-block__agreement')
+const agreedCheck = document.querySelector('.agreement__check')
+agreedCheck.addEventListener('click', () => {
+	if (!agreedCheck.classList.contains('_agreed')) {
+		agreedCheck.classList.add('_agreed')
+			agreedCheck.classList.remove('_error')
 
+		agreedCheck.classList.add('_validate')
+		
+	} else {
+		agreedCheck.classList.remove('_agreed')
+		agreedCheck.classList.remove('_validate')
+
+		
+	}
+})
 
 //-----------------------
-function mouseMove(){
-    // Add event listener
-    const elem = document.querySelector(".paralax")
-    // Magic happens here
-		// elem.forEach(item => {
-		document.addEventListener("mousemove", parallax)
-		function parallax(e) {
-				let _w = window.innerWidth/2
-				let _h = window.innerHeight/2
-				let _mouseX = e.clientX
-				let _mouseY = e.clientY
-				let _depth3 = `${10 - (_mouseX - _w) * 0.03}% ${80 - (_mouseY - _h) * 0.03}%`
-				let x = `${_depth3}`
-				// console.log(x)
-				elem.style.backgroundPosition = x
-		}
+// function mouseMove(){
+//     // Add event listener
+//     const elem = document.querySelector(".paralax")
+//     // Magic happens here
+// 		// elem.forEach(item => {
+// 		document.addEventListener("mousemove", parallax)
+// 		function parallax(e) {
+// 				let _w = window.innerWidth/2
+// 				let _h = window.innerHeight/2
+// 				let _mouseX = e.clientX
+// 				let _mouseY = e.clientY
+// 				let _depth3 = `${10 - (_mouseX - _w) * 0.03}% ${80 - (_mouseY - _h) * 0.03}%`
+// 				let x = `${_depth3}`
+// 				// console.log(x)
+// 				elem.style.backgroundPosition = x
+// 		}
 		
 		
 
-}
-mouseMove()
+// }
+// mouseMove()

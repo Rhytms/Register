@@ -67,7 +67,6 @@ a {
   max-width: 600px;
 }
 .author-window.disabled {
-  width: 50%;
   transform: scale(0.5) translate(-190vw, -70vh);
   opacity: 0;
   visibility: hidden;
@@ -351,7 +350,6 @@ a {
 }
 
 .register-window.disabled {
-  width: 50%;
   transform: scale(0.5) translate(90vw, -70vh);
   opacity: 0;
   visibility: hidden;
